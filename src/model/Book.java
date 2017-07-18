@@ -31,17 +31,50 @@ public class Book extends Publication{
 
     public Book(String title, String author, int year, int pages, String publisher,
             String isbn) {
-        setTitle(title);
+    	super(year,title,publisher);
         setAuthor(author);
-        setYear(year);
         setPages(pages);
-        setPublisher(publisher);
         setIsbn(isbn);
     }
- 
-    public void printInfo() {
-        String info = getTitle() + "; " + getAuthor() + "; " + getYear() + "; " + getPages()
-                + "; " + getPublisher() + "; " + getIsbn();
-        System.out.println(info);
+    
+    @Override
+    public String toString() {
+    	String info = getTitle() + "; " + getAuthor() + "; " + getYear() + "; " + getPages()
+        + "; " + getPublisher() + "; " + getIsbn();
+    	return info;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+		result = prime * result + pages;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
+		if (isbn == null) {
+			if (other.isbn != null)
+				return false;
+		} else if (!isbn.equals(other.isbn))
+			return false;
+		if (pages != other.pages)
+			return false;
+		return true;
+	} 
 }

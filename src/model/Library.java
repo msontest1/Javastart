@@ -52,7 +52,7 @@ public class Library {
 			System.out.println("Brak ksi¹¿ek w systemie.");
 		} else {
 			for(int i=0 ; i<bookNumber ; i++) {
-				books[i].printInfo();
+				System.out.println(books[i]);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ public class Library {
 			System.out.println("Brak magazynów w systemie.");
 		} else {
 			for(int i=0 ; i<magazineNumber ; i++) {
-				magazines[i].printInfo();
+				System.out.println(magazines[i]);
 			}
 		}
 	}
