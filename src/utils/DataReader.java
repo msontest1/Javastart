@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.Book;
@@ -15,13 +16,19 @@ public class DataReader {
 	public void close() {
 		input.close();
 	}
-	public int getOption() {
-		int option = input.nextInt();
-		input.nextLine();
-		return option;
+	public int getOption() throws NumberFormatException {
+		int number = 0;
+        try {
+            number = input.nextInt();
+        } catch (InputMismatchException e) {
+            throw new NumberFormatException("Liczba wprowadzona w niepoprawnej formie");
+        } finally {
+        	input.nextLine();
+        }
+        return number;
 	}
 	
-	public Book readAndCreateBook() {
+	public Book readAndCreateBook() throws InputMismatchException{
 		System.out.println("Tytu³: ");
         String title = input.nextLine();
         System.out.println("Autor: ");
@@ -31,16 +38,23 @@ public class DataReader {
         System.out.println("ISBN: ");
         String isbn = input.nextLine();
         System.out.println("Rok wydania: ");
-        int releaseDate = input.nextInt();
-        input.nextLine();
-        System.out.println("Iloœæ stron: ");
-        int pages = input.nextInt();
-        input.nextLine();
+        int releaseDate = 0;
+        int pages = 0;
+        try {
+            releaseDate = input.nextInt();
+            input.nextLine();
+            System.out.println("Iloœæ stron: ");
+            pages = input.nextInt();
+            input.nextLine();
+        } catch (InputMismatchException e) {
+        	input.nextLine();
+            throw e;
+        }
         
 		return new Book(title, author, releaseDate, pages, publisher, isbn);
 	}
 	
-	public Magazine readAndCreateMagazine() {
+	public Magazine readAndCreateMagazine() throws InputMismatchException{
         System.out.println("Tytu³: ");
         String title = input.nextLine();
         System.out.println("Wydawnictwo: ");
@@ -48,14 +62,22 @@ public class DataReader {
         System.out.println("Jêzyk: ");
         String language = input.nextLine();
         System.out.println("Rok wydania: ");
-        int year = input.nextInt();
-        input.nextLine();
-        System.out.println("Miesi¹c: ");
-        int month = input.nextInt();
-        input.nextLine();
-        System.out.println("Dzieñ: ");
-        int day = input.nextInt();
-        input.nextLine();
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        try {
+            year = input.nextInt();
+            input.nextLine();
+            System.out.println("Miesi¹c: ");
+            month = input.nextInt();
+            input.nextLine();
+            System.out.println("Dzieñ: ");
+            day = input.nextInt();
+            input.nextLine();
+        } catch (InputMismatchException e) {
+        	input.nextLine();
+            throw e;
+        }
          
         return new Magazine(title, publisher, language, year, month, day);
     }

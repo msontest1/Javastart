@@ -1,6 +1,8 @@
 package model;
 
 public class Book extends Publication{
+	private static final long serialVersionUID = -4386477206190112494L;
+	
 	private String author;
     private int pages;
     private String isbn;

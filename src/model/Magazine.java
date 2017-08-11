@@ -1,6 +1,8 @@
 package model;
 
 public class Magazine extends Publication{
+	private static final long serialVersionUID = -3194832839582684552L;
+	
 	private int month;
     private int day;
     private String language;

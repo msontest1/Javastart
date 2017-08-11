@@ -1,6 +1,10 @@
 package model;
 
-public class Library {
+import java.io.Serializable;
+
+public class Library implements Serializable{
+	private static final long serialVersionUID = 4860599209931072434L;
+	
 	public static final int MAX_BOOKS = 1000;
 	public static final int MAX_MAGAZINES = 1000;
 	public static final int MAX_PUBLICATIONS = 2000;
@@ -10,7 +14,6 @@ public class Library {
 	public Library() {
 		publications = new Publication[MAX_PUBLICATIONS];
 	}
-	
 	
 	public Publication[] getPublications() {
 		return publications;
@@ -28,46 +31,21 @@ public class Library {
 		addPublication(magazine);
 	}
 	
-	private void addPublication(Publication publication) {
-		if (publicationNumber < MAX_PUBLICATIONS) {
-			publications[publicationNumber] = publication;
-			publicationNumber++;
-		} else {
-			System.out.println("Maksymalna liczba publikacji w bibliotece zosta³a osi¹gniêta.");
+	private void addPublication(Publication publication) throws ArrayIndexOutOfBoundsException {
+		if (publicationNumber == MAX_PUBLICATIONS) {
+			throw new ArrayIndexOutOfBoundsException("MAX_PUBLICATIONS " + MAX_PUBLICATIONS);
 		}
+		publications[publicationNumber] = publication;
+		publicationNumber++;
 	}
-	
-	public void printBooks() {
-		int countBooks = 0;
-		if (publicationNumber == 0) {
-			System.out.println("Brak publikacji w systemie.");
-		} else {
-			for(int i=0 ; i<publicationNumber ; i++) {
-				if (publications[i] instanceof Book) {
-					System.out.println(publications[i]);
-					countBooks++;
-				}
-			}
-			if (countBooks==0) {
-				System.out.println("Brak ksi¹¿ek w systemie.");
-			}
-		}
-	}
-	
-	public void printMagazines() {
-		int countMagazines = 0;
-		if (publicationNumber == 0) {
-			System.out.println("Brak publikacji w systemie.");
-		} else {
-			for(int i=0 ; i<publicationNumber ; i++) {
-				if (publications[i] instanceof Magazine) {
-					System.out.println(publications[i]);
-					countMagazines++;
-				}
-			}
-			if (countMagazines==0) {
-				System.out.println("Brak magazynów w systemie.");
-			}
-		}
-	}
+
+	@Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(int i=0; i < publicationNumber; i++) {
+            builder.append(publications[i]);
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
 }
