@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Arrays;
+
 import model.Book;
 import model.Library;
 import model.Magazine;
@@ -8,6 +10,7 @@ import model.Publication;
 public class LibraryUtils {
 	public static void printBooks(Library library) {
 		Publication[] publications = library.getPublications();
+		Arrays.sort(publications, new Library.AlphabeticalComparator());
 		int publicationNumber = library.getPublicationNumber();
 		int countBooks = 0;
 		if (publicationNumber == 0) {
@@ -27,6 +30,7 @@ public class LibraryUtils {
 	
 	public static void printMagazines(Library library) {
 		Publication[] publications = library.getPublications();
+		Arrays.sort(publications, new Library.AlphabeticalComparator());
 		int publicationNumber = library.getPublicationNumber();
 		int countMagazines = 0;
 		if (publicationNumber == 0) {

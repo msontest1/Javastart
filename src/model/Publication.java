@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Publication implements Serializable {
+public class Publication implements Serializable, Comparable<Publication>{
 	private static final long serialVersionUID = 8406192734090928614L;
 	
 	private int year;
@@ -65,6 +65,11 @@ public class Publication implements Serializable {
 		if (year != other.year)
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int compareTo(Publication o) {
+		return title.compareTo(o.getTitle());
 	}
     
     
