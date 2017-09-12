@@ -4,7 +4,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.Book;
+import model.LibraryUser;
 import model.Magazine;
+import model.User;
 
 public class DataReader {
 	private Scanner input;
@@ -81,4 +83,14 @@ public class DataReader {
          
         return new Magazine(title, publisher, language, year, month, day);
     }
+	
+	public LibraryUser readAndCreateUser() throws InputMismatchException{
+		System.out.println("Imie: ");
+        String name = input.nextLine();
+        System.out.println("Nazwisko: ");
+        String surname = input.nextLine();
+        System.out.println("PESEL: ");
+        String pesel = input.nextLine();
+		return new LibraryUser(name, surname, pesel);
+	}
 }
